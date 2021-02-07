@@ -8,6 +8,10 @@ const methods = {
 }
 
 class guildUser {
+     /**
+     * @param {User} string Discord user ID or member object with ID.
+     * @param {Guild} string Discord guild ID or guild object with ID.
+     */
     constructor(user, guild) {
         user.id ? this.user = user.id : this.user = user;
         guild.id ? this.guild = guild.id : this.guild = guild;
