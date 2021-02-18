@@ -16,6 +16,5 @@ if(isNaN(min) || isNaN(max)){
 if(min >= max)return{"error":"min>=max"};
 
 const randomNumber = Math.floor(Math.random() * (amax - amin) + amin);
-console.log(randomNumber)
 return randomNumber;
 }
