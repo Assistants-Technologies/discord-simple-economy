@@ -51,6 +51,7 @@ client.login("token");
 |----------------|-------------------------------|
 |randomNumber| `eco.randomNumber(minNumber, maxNumber)` |
 |all|`ecoClient.all()`|
+|lb|`ecoClient.lb(type)`|
 
 * Info: `randomNumber` can be used only with `eco`, no with `ecoClient`
 * Note: `all()` method returns all guild data (cash and daily stuff)
@@ -83,6 +84,33 @@ async function all() {
 }
 
 all();
+```
+
+## Lb
+```js
+async function lb() {
+    const lb = await ecoClient.lb('wallet');
+    /*
+    returns sorted Array with leaderboard (if type is not provided or type=null, it's sorting by both wallet and bank values).
+    [
+    {
+        user: 'id',
+        cash: 143423432
+    },
+    {
+        user: 'id',
+        cash: 45433
+    },
+    {
+        user: 'id',
+        cash: 4353
+    }
+    ]
+    */
+   console.log(lb);
+}
+
+lb();
 ```
 
 ## Daily
