@@ -4,7 +4,8 @@ const methods = {
     get: require('./methods/get'),
     all: require('./methods/all'),
     daily: require('./methods/daily'),
-    subtract: require('./methods/subtract')
+    subtract: require('./methods/subtract'),
+    lb: require('./methods/lb')
 }
 
 class guildUser {
@@ -39,6 +40,10 @@ class guildUser {
 
     async daily(amount, type) {
         return (await methods.daily({amount:amount,type:type,user:this.user,guild:this.guild}));
+    }
+
+    async lb(type=null){
+        return (await methods.lb({type:type,user:this.user,guild:this.guild}));
     }
 }
 
