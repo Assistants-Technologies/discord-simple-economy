@@ -5,20 +5,19 @@ Hey! This module was created for economics on Discord. If you are unfamiliar wit
 You can start by installing this npm:
 > npm install discord-simple-economy --save
 
-#   How it's working?
+# How it's working?
 
-Easy and fast. Data is saved to the **sqlite3** database using *quick-db*. Economics is divided into **wallet** and **bank** balance, so you have more room to act!
+Easy and fast. Data is saved to a **sqlite3** or **mongodb** database using *quick-db*. Economiy is divided into **wallet** and **bank** balance, so you have more room to act!
 
 # Simple economy system
 
-  Discord.js economic system has never been so easy to use before.
-  *discord-simple-economy* supports activities such as **add,** **set**, **get**, **subtract**, **reset**, **delete**, **with**, **dep** and **daily**! (with, dep, reset and delete not in there already in `v2.0.0`...)
+Discord.js economy system has never been so easy to use before.
+*discord-simple-economy* supports activities such as **add,** **set**, **get**, **subtract**, **reset**, **delete**, **with**, **dep** and **daily**! (with, dep, reset and delete not in there already in `v2.0.0`...)
 
 
+## Introduction
 
-##   Introduction
-
-To start your adventure, you need to create ecoClient with this module. It is not difficult.
+To start, you need to select a driver and create a economy client with this module. It is not difficult.
 Example:
 
 ```js
@@ -26,6 +25,10 @@ const Discord = require('discord.js');
 const eco = require('discord-simple-economy');
 
 const client = new Discord.Client();
+
+(async () => {
+    await eco.selectDriver("sqlite");
+})(); // see 'Selecting a driver' later in this document
 
 client.on('message', async (message) => {
     const ecoClient = new eco.guildUser(message.author, message.guild);
@@ -38,7 +41,7 @@ client.login("token");
 * Note: *you can use `message.author.id` instead of `message.author` in `member` and `message.guild.id` instead of `message.guild` in `guild`*
 
 ### Functions List
-|                |WALLET                         |BANK                         |
+|METHOD                |WALLET                         |BANK                         |
 |----------------|-------------------------------|-----------------------------|
 |add|`ecoClient.add(amount, "wallet")`            |`ecoClient.add(amount, "bank")`    
 |set|`ecoClient.set(amount, "wallet")`            |`ecoClient.set(amount, "bank")`   
@@ -47,17 +50,19 @@ client.login("token");
 |daily          |`ecoClient.daily(amount, "wallet")`            |`ecoClient.daily(amount, "bank")`           |
 * amount should be an **number**
 
-|                |USAGE                         |
+|METHOD                |USAGE                         |
 |----------------|-------------------------------|
-|randomNumber| `eco.randomNumber(minNumber, maxNumber)` |
+|randomNumber|`eco.randomNumber(minNumber, maxNumber)`|
+|selectDriver|`eco.selectDriver(driver, options)`|
 |all|`ecoClient.all()`|
 |lb|`ecoClient.lb(type)`|
 
-* Info: `randomNumber` can be used only with `eco`, no with `ecoClient`
-* Note: `all()` method returns all guild data (cash and daily stuff)
+> Please note:
+> * `randomNumber` and `selectDriver` can be used only with `eco`, no with `ecoClient`
+> * To use `selectDriver`, see 'Selecting a driver' later in this document
+> * The `all()` method returns all guild data (cash and daily stuff)
 
-
-# Methods
+# Examples
 ## Add
 ```js
 async function add(message, amount, type){
@@ -161,6 +166,18 @@ async function subtract(message, amount, type){
 
 subtract(message, 10, "wallet");
 ```
+
+# Selecting a driver
+
+Since 2.7.0, you need to select the driver used to store data, select mongodb or sqlite via selectDriver:
+
+```js
+await eco.selectDriver("mongodb", { mongoUri: "mongodb://user:pass@localhost" }); //mongodb
+await eco.selectDriver("sqlite") // sqlite
+```
+> Notes:
+> * `selectDriver` is exposed directly, you don't need to call ecoClient
+> * `selectDriver` is **asynchronous**
 
 # Need help?
 Join our <a href="https://discord.gg/c3Eqc6BFzX">Discord Support Server</a>!
