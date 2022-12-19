@@ -15,7 +15,9 @@
     "package"
   ],
   "dependencies": {
-    "quick.db": "^7.0.0-b21"
+    "better-sqlite3": "^8.0.1",
+    "quick.db": "^9.0.8",
+    "quickmongo": "^5.2.0"
   },
   "main": "main.js",
   "scripts": {
