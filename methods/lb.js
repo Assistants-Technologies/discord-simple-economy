@@ -1,6 +1,4 @@
-const db = require('quick.db');
-
-module.exports = async ({type,user,guild}) => {
+module.exports = async ({db, type, user, guild}) => {
     type = type ? ((type == "bank" || type == "wallet") ? type : null) : null;
 
     const eco = require('../main');

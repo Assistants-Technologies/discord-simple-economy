@@ -1,6 +1,4 @@
-const db = require('quick.db');
-
-module.exports = async ({guild}) => {
+module.exports = async ({db, guild}) => {
     let allData = {};
     const cashData = await db.get(`cash.${guild}`);
     allData.cash = cashData;
